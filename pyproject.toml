@@ -1,7 +1,7 @@
 [project]
 name = "szkopul-submit"
 version = "1.0.0"
-description = ""
+description = "Nieoficjalny program do przesyłania rozwiązań do serwisu Szkopuł przez API."
 license = "MIT"
 license-files = ["LICENSE"]
 authors = [

@@ -2,6 +2,14 @@
 
 Nieoficjalny program do przesyłania rozwiązań do serwisu [Szkopuł](https://szkopul.edu.pl/) przez API.
 
+## Instalacja
+
+Najuniwersalniejszą i jedną z najłatwiejszych metod instalacji jest użycie [pipx](https://pipx.pypa.io/stable/how-to/install-pipx.html).
+
+```bash
+pipx install https://github.com/bartekl1/szkopul-submit/releases/download/v1.0.0/szkopul_submit-1.0.0-py3-none-any.whl
+```
+
 ## Używanie
 
 ### Inicjacja folderu z rozwiązaniami

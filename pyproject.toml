@@ -2,6 +2,8 @@
 name = "szkopul-submit"
 version = "1.0.0"
 description = ""
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [
     {name = "bartekl1"}
 ]
@@ -10,10 +12,15 @@ dependencies = [
     "requests (>=2.34.2,<3.0.0)"
 ]
 
+[project.urls]
+homepage = "https://github.com/bartekl1/szkopul_submit"
 
-# [build-system]
-# requires = ["poetry-core>=2.0.0,<3.0.0"]
-# build-backend = "poetry.core.masonry.api"
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
 
-[tool.poetry]
-package-mode = false
+[project.scripts]
+szkopul-submit = "szkopul_submit.cli:main"
+
+[tool.poetry.scripts]
+szkopul-submit = "szkopul_submit.cli:main"

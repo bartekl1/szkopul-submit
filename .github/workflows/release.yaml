@@ -1,0 +1,57 @@
+name: Build and publish Python package when release is published
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      attestations: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: 3.14
+
+      - name: Install Poetry
+        run: pipx install poetry
+
+      - name: Install project dependencies
+        run: poetry install
+    
+      - name: Build project
+        run: poetry build
+      
+      - name: Get file names
+        run: |
+          echo "WHL_FILE=$(ls dist/*.whl)" >> $GITHUB_OUTPUT
+          echo "TARGZ_FILE=$(ls dist/*.tar.gz)" >> $GITHUB_OUTPUT
+        id: files
+      
+      - name: Generate artifact attestation for .whl
+        uses: actions/attest-build-provenance@v3
+        with:
+          subject-path: ${{ steps.files.outputs.WHL_FILE }}
+      
+      - name: Generate artifact attestation for .tar.gz
+        uses: actions/attest-build-provenance@v3
+        with:
+          subject-path: ${{ steps.files.outputs.TARGZ_FILE }}
+
+      - name: Upload files to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            ${{ steps.files.outputs.WHL_FILE }}
+            ${{ steps.files.outputs.TARGZ_FILE }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

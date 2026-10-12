@@ -79,7 +79,8 @@ def submit(args: argparse.Namespace) -> None:
         print("Error: Can't submit solution.")
         sys.exit(1)
     submission_id = str(submission.json())
-    
+    print(f"Submission URL: https://szkopul.edu.pl/c/{contest}/s/{submission_id}/")
+
     if not args.skip_score:
         print("Waiting for score...")
         score = None
